@@ -3,5 +3,5 @@
 
 ## 部署
 1. Fork 该仓库
-2. 修改`.env`的api地址
-3. 使用 vercel 部署
+2. 修改`.env`中的后端 api 地址
+3. 使用 Vercel 部署
