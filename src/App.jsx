@@ -1,7 +1,8 @@
 import React from 'react';
 import {
-  Container, Typography, Stack, Button, TextField, ButtonGroup, Alert, CssBaseline,
+  Container, Typography, Button, TextField, ButtonGroup, Alert, CssBaseline,
 } from '@mui/material';
+import Grid from '@mui/material/Unstable_Grid2';
 import { SnackbarProvider, enqueueSnackbar } from 'notistack';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -71,17 +72,21 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Container>
-        <SnackbarProvider maxSnack={5} autoHideDuration={2000}>
-          <Stack spacing={2} py={2}>
-            <Typography variant="h5">
-              传阅板
-            </Typography>
-            <Stack direction="row" spacing={2}>
-              <Button name="create" onClick={handleClick} disabled={buttonDisabled.create} variant="outlined">
+      <SnackbarProvider maxSnack={5} autoHideDuration={2000}>
+        <Container sx={{ py: 2 }}>
+          <Grid container spacing={2}>
+            <Grid xs={12}>
+              <Typography variant="h5">
+                传阅板
+              </Typography>
+            </Grid>
+            <Grid xs={12} sm="auto">
+              <Button fullWidth name="create" onClick={handleClick} disabled={buttonDisabled.create} variant="outlined">
                 创建
               </Button>
-              <ButtonGroup>
+            </Grid>
+            <Grid xs={12} sm="auto">
+              <ButtonGroup fullWidth>
                 <Button name="save" onClick={handleClick} disabled={buttonDisabled.save} variant="outlined">
                   保存
                 </Button>
@@ -89,20 +94,28 @@ function App() {
                   拉取
                 </Button>
               </ButtonGroup>
-              <Button sx={{ marginLeft: 'auto!important' }} name="destroy" onClick={handleClick} disabled={buttonDisabled.destroy} variant="outlined" color="error">
+            </Grid>
+            <Grid xs={12} sm="auto" sx={{ marginLeft: { sm: 'auto' } }}>
+              <Button fullWidth name="destroy" onClick={handleClick} disabled={buttonDisabled.destroy} variant="outlined" color="error">
                 销毁
               </Button>
-            </Stack>
-            <Stack direction="row" spacing={2}>
-              <TextField autoComplete="off" value={idInputText} onChange={handleChange} id="id" label="实例" variant="outlined" />
-              <TextField autoComplete="off" fullWidth value={passwordInputText} onChange={handleChange} id="pass" label="密码" variant="outlined" />
-            </Stack>
-            <TextField multiline minRows={5} autoComplete="off" value={textInputText} onChange={handleChange} id="text" label="文本" variant="outlined" />
-            <Alert severity="info">密码仅在创建时指定，无保存或拉取操作10分钟自动销毁实例</Alert>
-            { import.meta.env.MODE === 'development' && <Alert severity="warning">{ `开发模式构建，POST地址: ${import.meta.env.VITE_API_URL}/instances/{action}` }</Alert> }
-          </Stack>
-        </SnackbarProvider>
-      </Container>
+            </Grid>
+            <div style={{ width: '100%' }} />
+            <Grid xs={12} sm={2}>
+              <TextField fullWidth autoComplete="off" value={idInputText} onChange={handleChange} id="id" label="实例" variant="outlined" />
+            </Grid>
+            <Grid xs={12} sm={10}>
+              <TextField fullWidth autoComplete="off" value={passwordInputText} onChange={handleChange} id="pass" label="密码" variant="outlined" />
+            </Grid>
+            <Grid xs={12}>
+              <TextField fullWidth multiline minRows={5} autoComplete="off" value={textInputText} onChange={handleChange} id="text" label="文本" variant="outlined" />
+            </Grid>
+            <Grid xs={12} sm="auto">
+              <Alert severity="info">密码仅在创建时指定，无保存或拉取操作10分钟自动销毁实例</Alert>
+            </Grid>
+          </Grid>
+        </Container>
+      </SnackbarProvider>
     </ThemeProvider>
   );
 }
