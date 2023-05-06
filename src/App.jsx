@@ -31,7 +31,7 @@ function App() {
     create: false, save: false, pull: false, destroy: false,
   });
 
-  async function handleClick(e) {
+  const handleClick = React.useCallback(async (e) => {
     const action = e.target.name;
     if (action !== 'create' && !idInputText) {
       enqueueSnackbar('未知的实例', { variant: 'error' });
@@ -57,9 +57,9 @@ function App() {
     } finally {
       setButtonDisabled({ ...buttonDisabled, [action]: false });
     }
-  }
+  }, [textInputText, idInputText, passwordInputText]);
 
-  function handleChange(e) {
+  const handleChange = React.useCallback((e) => {
     if (e.target.id === 'id') {
       setIdInputText(e.target.value);
     } else if (e.target.id === 'pass') {
@@ -67,7 +67,7 @@ function App() {
     } else if (e.target.id === 'text') {
       setTextInputText(e.target.value);
     }
-  }
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
