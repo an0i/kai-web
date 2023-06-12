@@ -60,8 +60,10 @@ export default function App() {
             销毁
           </Button>
         </Stack>
-        <TextField autoComplete="off" value={idInputText} onChange={(e) => setIdInputText(e.target.value)} id="id" label="实例" variant="outlined" />
-        <TextField autoComplete="off" value={passwordInputText} onChange={(e) => setPasswordInputText(e.target.value)} id="pass" label="密码" variant="outlined" />
+        <Stack spacing={2} direction="row">
+          <TextField autoComplete="off" value={idInputText} onChange={(e) => setIdInputText(e.target.value)} id="id" label="实例" variant="outlined" />
+          <TextField fullWidth autoComplete="off" value={passwordInputText} onChange={(e) => setPasswordInputText(e.target.value)} id="pass" label="密码" variant="outlined" />
+        </Stack>
         <TextField fullWidth multiline minRows={5} autoComplete="off" value={textInputText} onChange={(e) => setTextInputText(e.target.value)} id="text" label="文本" variant="outlined" />
         <Alert severity="info">密码仅在创建时指定，无保存或拉取操作10分钟自动销毁实例</Alert>
       </Stack>
